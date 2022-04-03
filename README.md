@@ -13,7 +13,7 @@ Invoice management system built on top of Cardano blockchain & integrated with A
 - Run `docker network create --driver bridge local-mercury-invoice` (Only Required First Time Setup)
 - Clone repo `git clone git@github.com:latheesan-k/MercuryInvoice.git`
 - Switch to repo dir `cd $HOME/Desktop/MercuryInvoice`
-- Copy `.env.example` as `.env`
+- Copy `application/.env.example` as `application/.env`
 - Run `make buid` to build & start the containers
 - Application should be running locally at `http://localhost:8007`
 - Local MySQL server can be accessed via port 33007 (credentials in docker-composer.yml file)
