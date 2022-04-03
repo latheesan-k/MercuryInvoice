@@ -1,0 +1,55 @@
+version: "3.5"
+services:
+
+  # Web Service
+  mercury-invoice-web:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: mercury-invoice-web
+    restart: unless-stopped
+    tty: true
+    networks: [ local-mercury-invoice ]
+    volumes:
+      - ../application:/home/mercury-invoice/application
+    depends_on:
+      - mercury-invoice-mysql
+    ports: [ "8007:80" ]
+
+  # MySQL Service
+  mercury-invoice-mysql:
+    image: mysql:8.0
+    container_name: mercury-invoice-mysql
+    restart: unless-stopped
+    tty: true
+    networks: [ local-mercury-invoice ]
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: mercury-invoice
+      MYSQL_USER: mercury-invoice
+      MYSQL_PASSWORD: 123456
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 10s
+      retries: 30
+    volumes: [ "mysql:/var/lib/mysql:cached" ]
+    ports: [ "33007:3306" ]
+
+  # Redis Service
+  mercury-invoice-redis:
+    container_name: mercury-invoice-redis
+    image: redis:6
+    restart: always
+    volumes:
+      - redis:/data
+    networks: [ local-mercury-invoice ]
+
+volumes:
+  mysql:
+    driver: local
+  redis:
+
+networks:
+  local-mercury-invoice:
+    external: true
