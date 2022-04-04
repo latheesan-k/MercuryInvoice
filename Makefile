@@ -61,9 +61,9 @@ artisan:
 
 .PHONY: frontend-dev
 frontend-dev:
-	docker exec -it mercury-invoice-frontend bash -c "npm install"
-	docker exec -it mercury-invoice-frontend bash -c "npm run dev"
+	CURRENT_USER=$(shell id -u):$(shell id -g) docker exec -it mercury-invoice-frontend bash -c "npm install"
+	CURRENT_USER=$(shell id -u):$(shell id -g) docker exec -it mercury-invoice-frontend bash -c "npm run dev"
 
 .PHONY: frontend-watch
 frontend-watch:
-	docker exec -it mercury-invoice-frontend bash -c "npm run watch"
+	CURRENT_USER=$(shell id -u):$(shell id -g) docker exec -it mercury-invoice-frontend bash -c "npm run watch"
