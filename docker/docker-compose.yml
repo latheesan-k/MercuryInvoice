@@ -16,6 +16,18 @@ services:
       - mercury-invoice-mysql
     ports: [ "8007:80" ]
 
+  # Frontend
+  mercury-invoice-frontend:
+    image: node:16.14
+    container_name: mercury-invoice-frontend
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ../application:/app
+    user: ${CURRENT_USER}
+    networks: [ local-mercury-invoice ]
+    entrypoint: sleep infinity
+
   # MySQL Service
   mercury-invoice-mysql:
     image: mysql:8.0

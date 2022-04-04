@@ -8,6 +8,7 @@ up:
 	$(MAKE) composer-install
 	./docker/wait-for-mysql.sh
 	$(MAKE) db-migrate
+	$(MAKE) frontend-dev
 
 .PHONY: down
 down:
@@ -57,3 +58,12 @@ stats:
 .PHONY: artisan
 artisan:
 	docker exec -it mercury-invoice-web bash -c "php artisan $(COMMAND)"
+
+.PHONY: frontend-dev
+frontend-dev:
+	docker exec -it mercury-invoice-frontend bash -c "npm install"
+	docker exec -it mercury-invoice-frontend bash -c "npm run dev"
+
+.PHONY: frontend-watch
+frontend-watch:
+	docker exec -it mercury-invoice-frontend bash -c "npm run watch"

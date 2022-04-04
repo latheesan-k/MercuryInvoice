@@ -30,6 +30,8 @@ Invoice management system built on top of Cardano blockchain & integrated with A
 * `shell` Drop into an interactive shell inside _mercury-invoice-web_ container
 * `stats` View the resource usage of all running containers
 * `artisan` Execute Laravel `artisan` command inside _mercury-invoice-web_ container
+* `frontend-dev` Installs the frontend assets command inside _mercury-invoice-frontend_ container
+* `frontend-watch` Run `npm run watch` command inside _mercury-invoice-frontend_ container
 
 ### How to prepare your environment
 
